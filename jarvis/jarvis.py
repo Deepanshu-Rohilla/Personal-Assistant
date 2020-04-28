@@ -6,7 +6,7 @@ import playsound
 from gtts import gTTS
 import speech_recognition as sr
 import pyaudio
-
+import wikipedia
 
 
 #engine = pyttsx3.init('sapi5')
@@ -41,8 +41,17 @@ def takeCommand():
     except:
         print("Say that again please...")
         return "None"
-    
     return query
 if __name__ == "__main__":
     greetMe()
-    takeCommand()
+
+    #logic here
+    while(True):
+        query = takeCommand().lower()
+        if('wikipedia' in query):
+            speak("Searching wikipedia...")
+            query=query.replace("wikipedia", "")
+            results= wikipedia.summary(query, sentences=2)
+            speak("According to wikipedia")
+            speak(results)
+
